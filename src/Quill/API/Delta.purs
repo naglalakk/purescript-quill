@@ -92,7 +92,7 @@ decodeDelta' value keys
 
     | otherwise = do
         throwError <<< NonEmptyList.singleton <<< ForeignError $
-        "unrecognised Delta properties: " <> show keys
+          "unrecognised Delta properties: " <> show keys
 
 
 decodeDeltaInsert :: Foreign -> F (Either Embed String)

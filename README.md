@@ -13,8 +13,10 @@
 
 ## Installation
 
+Clone this repo
+
 ```
-bower install purescript-quill
+spago install
 ```
 
 ## Example
@@ -22,7 +24,7 @@ bower install purescript-quill
 Build it with:
 
 ```bash
-$ bower install
+$ spago build
 $ npm run example
 ```
 

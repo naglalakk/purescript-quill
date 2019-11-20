@@ -12,3 +12,5 @@ package-lock.json
 /package-lock.json
 /example/dist/app.js
 tags*
+
+.spago
