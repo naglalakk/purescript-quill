@@ -29,7 +29,7 @@ exports.setContentsImpl = function(self, delta, source) {
 };
 
 exports.setTextImpl = function(self, text, source) {
-    return self.setTextImpl(text, source);
+    return self.setText(text, source);
 };
 
 exports.updateContentsImpl = function(self, delta, source) {
