@@ -13,8 +13,6 @@ module Quill.API.Formats
     , code
     , italic
     , link
-    , video
-    , image
     , size
     , strike
     , underline
@@ -69,12 +67,6 @@ italic = opt "italic"
 
 link :: Option Formats Boolean
 link = opt "link"
-
-video :: Option Formats Boolean
-video = opt "video"
-
-image :: Option Formats Boolean
-image = opt "image"
 
 size :: Option Formats Number
 size = opt "size"
