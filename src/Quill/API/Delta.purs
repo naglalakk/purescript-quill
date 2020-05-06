@@ -96,7 +96,7 @@ decodeDelta' value keys
 
 
 decodeDeltaInsert :: Foreign -> F (Either Embed String)
-decodeDeltaInsert value = string <|> image
+decodeDeltaInsert value = string <|> image <|> video
   where
     string = Foreign.readString value <#> Right
     image  = Foreign.readProp "image" value >>= Foreign.readString >>> map (Image >>> Left)

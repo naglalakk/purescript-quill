@@ -21,6 +21,8 @@ module Quill.API.Formats
     , indent
     , align
     , codeBlock
+    , video
+    , image
     )
 where
 
@@ -35,6 +37,7 @@ import Data.Options (Options(Options), Option, opt, assoc)
 import Data.Tuple (Tuple(Tuple))
 import Foreign (Foreign, unsafeToForeign)
 import Partial.Unsafe (unsafePartial)
+import Quill.API.Embed as QEmbed
 
 
 -- | https://quilljs.com/docs/formats/
@@ -99,6 +102,11 @@ align = optWith show "align"
 codeBlock :: Option Formats Boolean
 codeBlock = opt "code-block"
 
+video :: Option Formats QEmbed.Embed
+video = opt "video"
+
+image :: Option Formats QEmbed.Embed
+image = opt "image"
 
 -- | Text alignment.
 data Alignment

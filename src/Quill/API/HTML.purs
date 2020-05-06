@@ -6,8 +6,7 @@ import Prelude
 import Control.Monad.Error.Class    (class MonadError
                                     ,throwError)
 import Control.Monad.Except         (runExcept)
-import Data.Either                  (Either(..), either)
-import Effect                       (Effect)
+import Data.Either                  (either)
 import Effect.Class                 (class MonadEffect
                                     ,liftEffect)
 import Effect.Uncurried             as UncurriedEffect
