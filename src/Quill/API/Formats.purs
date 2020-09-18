@@ -38,6 +38,7 @@ import Data.Tuple (Tuple(Tuple))
 import Foreign (Foreign, unsafeToForeign)
 import Partial.Unsafe (unsafePartial)
 import Quill.API.Embed as QEmbed
+import Quill.Utils (optWith)
 
 
 -- | https://quilljs.com/docs/formats/
@@ -139,10 +140,3 @@ value (SingleFormat (Tuple _ v)) = v
 
 -- | E.g. "sans-serif"
 type FontName = String
-
-
--- NOTE: uses of `optWith` here need to handle the case that the function
--- recieves an unsafely coerced unit value, as part of initial configuration.
--- For whatever reason, `Color.toHexString` seems robust to this.
-optWith :: forall opt a b . (a -> b) -> String -> Option opt a
-optWith f = Op <<< \k v -> Options [ Tuple k (unsafeToForeign $ f v) ]

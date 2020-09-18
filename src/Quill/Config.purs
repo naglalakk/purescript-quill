@@ -5,6 +5,7 @@ module Quill.Config
     , bounds
     , debug
     , formats
+    , modules
     , allow
     , placeholder
     , readOnly
@@ -16,15 +17,17 @@ where
 
 import Prelude
 
-import Data.Foldable (foldMap)
+import Data.Foldable (fold, foldMap)
 import Data.Newtype (unwrap)
 import Data.Op (Op(Op))
-import Data.Options (Options(Options), Option, (:=), opt, tag)
+import Data.Options (Options(Options), Option, (:=), opt, tag, options)
 import Data.Tuple (Tuple(Tuple), fst)
 import Foreign (unsafeToForeign)
 import Quill.API.Debug (Debug(..)) as Debug
 import Quill.API.Debug (Debug)
 import Quill.API.Formats (Formats)
+import Quill.API.Modules (Modules)
+import Quill.Utils (optWith)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.HTML.HTMLElement (HTMLElement)
 
@@ -42,6 +45,8 @@ bounds = opt "bounds"
 debug :: Option Config Debug
 debug = opt "bounds"
 
+modules :: Option Config (Options Modules)
+modules = optWith options "modules"
 
 -- | https://quilljs.com/docs/configuration/#formats
 formats :: Option Config (Array Allowed )
@@ -90,7 +95,3 @@ instance showTheme :: Show Theme where
     show BubbleTheme        = "bubble"
     show SnowTheme          = "snow"
     show (CustomTheme name) = name
-
-
-optWith :: forall opt a b . (a -> b) -> String -> Option opt a
-optWith f = Op <<< \k v -> Options [ Tuple k (unsafeToForeign $ f v) ]

@@ -20,6 +20,7 @@ import Quill.API.Content as QContent
 import Quill.API.Delta as QDelta
 import Quill.API.Events as QEvents
 import Quill.API.Formats as QFormats
+import Quill.API.Modules as QModules
 import Quill.API.Selection as QSelection
 import Quill.API.Source as QSource
 import Quill.Config as QConfig
@@ -102,12 +103,25 @@ run element = do
         QEvents.fallbackIgnore
         editor
 
+testHandler :: Effect Unit
+testHandler = Console.log "test handler"
 
 editorConfig :: Options QConfig.Config
 editorConfig = fold
     [ QConfig.debug       := QConfig.DebugWarn
     , QConfig.theme       := QConfig.SnowTheme
     , QConfig.placeholder := "Write here!"
+    , QConfig.modules     := fold
+      [ QModules.toolbar   := fold
+        [ QModules.container := 
+          [ ["bold", "italic", "underline"]
+          , ["link", "image"]
+          ]
+        , QModules.handlers := fold
+          [ QModules.imgHandler := testHandler
+          ]
+        ]
+      ]
     , QConfig.formats     :=
         [ QConfig.allow QFormats.bold
         , QConfig.allow QFormats.italic
@@ -115,6 +129,7 @@ editorConfig = fold
         , QConfig.allow QFormats.header
         , QConfig.allow QFormats.align
         , QConfig.allow QFormats.color
+        , QConfig.allow QFormats.image
         ]
     ]
 
